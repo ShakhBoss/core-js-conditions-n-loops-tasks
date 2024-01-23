@@ -37,8 +37,15 @@ function isPositive(number) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let max = a;
+  if (b > max) {
+    max = b;
+  }
+  if (c > max) {
+    max = c;
+  }
+  return max;
 }
 
 /**
@@ -59,10 +66,15 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x || queen.y === king.y) {
+    return true;
+  }
+  if (Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)) {
+    return true;
+  }
+  return false;
 }
-
 /**
  * Determines whether a triangle is isosceles based on its side lengths.
  * In this task, the use of methods of the String and Array classes is not allowed.
@@ -81,10 +93,12 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    return false;
+  }
+  return a === b || a === c || b === c;
 }
-
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
  * In this task, the use of methods of the String and Array classes is not allowed.
@@ -99,8 +113,30 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let roman = '';
+  let num1 = num;
+  while (num1 >= 10) {
+    roman += 'X';
+    num1 -= 10;
+  }
+  if (num1 === 9) {
+    roman += 'IX';
+    num1 -= 9;
+  }
+  if (num1 >= 5) {
+    roman += 'V';
+    num1 -= 5;
+  }
+  if (num1 === 4) {
+    roman += 'IV';
+    num1 -= 4;
+  }
+  while (num1 >= 1) {
+    roman += 'I';
+    num1 -= 1;
+  }
+  return roman;
 }
 
 /**
