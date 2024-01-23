@@ -154,8 +154,32 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const num = Number(numberStr);
+  const words = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  const numStr = num.toString();
+  let result = '';
+  for (let i = 0; i < numStr.length; i += 1) {
+    const currentChar = numStr.charAt(i);
+    const digit = parseInt(currentChar, 10);
+    result += words[digit];
+    if (i < numStr.length - 1) {
+      result += ' ';
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -170,8 +194,18 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let left = 0;
+  let right = str.length - 1;
+
+  while (left < right) {
+    if (str[left] !== str[right]) {
+      return false;
+    }
+    left += 1;
+    right -= 1;
+  }
+  return true;
 }
 
 /**
@@ -188,8 +222,13 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -207,8 +246,23 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  let num1 = num;
+  if (digit < 0 || digit > 9) {
+    return false;
+  }
+  if (num1 < 0) {
+    num1 = -num1;
+  }
+  while (num1 > 0) {
+    const currentDigit = num1 % 10;
+    if (currentDigit === digit) {
+      return true;
+    }
+    num1 = Math.floor(num1 / 10);
+  }
+
+  return false;
 }
 
 /**
