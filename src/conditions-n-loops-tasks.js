@@ -278,10 +278,21 @@ function isContainNumber(num, digit) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
-}
+function getBalanceIndex(arr) {
+  let totalSum = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    totalSum += arr[i];
+  }
 
+  let leftSum = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    if (leftSum === totalSum - leftSum - arr[i]) {
+      return i;
+    }
+    leftSum += arr[i];
+  }
+  return -1;
+}
 /**
  * Generates a spiral matrix of a given size, filled with numbers in ascending order starting from one.
  * The direction of filling with numbers is clockwise.
@@ -382,8 +393,35 @@ function shuffleChar(/* str, iterations */) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+function getNearestBigger(number) {
+  let number1 = number;
+  const digits = [];
+  while (number1 > 0) {
+    digits.push(number1 % 10);
+    number1 = Math.floor(number1 / 10);
+  }
+  digits.reverse();
+  let i;
+  for (i = digits.length - 2; i >= 0; i -= 1) {
+    if (digits[i] < digits[i + 1]) {
+      break;
+    }
+  }
+  if (i < 0) {
+    return digits.reverse().join('');
+  }
+  let j;
+  for (j = digits.length - 1; j > i; j -= 1) {
+    if (digits[j] > digits[i]) {
+      break;
+    }
+  }
+  [digits[i], digits[j]] = [digits[j], digits[i]];
+  const right = digits.splice(i + 1);
+  right.reverse();
+  const result = digits.concat(right);
+
+  return parseInt(result.join(''), 10);
 }
 
 module.exports = {
